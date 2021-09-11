@@ -2,7 +2,7 @@ class Person
   attr_accessor :name, :age
   attr_reader :id
 
-  def initialize(age, name = "Unknown", parent_permission = true)
+  def initialize(age, parent_permission: true, name: 'Unknown')
     @id = Random.new_seed
     @name = name
     @age = age
@@ -15,9 +15,11 @@ class Person
 
   private
 
+  # rubocop:disable Naming/PredicateName
   def is_of_age?
     @age >= 18
   end
+  # rubocop:enable Naming/PredicateName
 end
 
-require_relative 'teacher.rb'
+require_relative 'teacher'
