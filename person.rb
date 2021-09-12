@@ -9,6 +9,7 @@ class Person
     @name = name
     @age = age
     @parent_permission = parent_permission
+    @books = []
   end
 
   def can_use_services?
@@ -17,6 +18,10 @@ class Person
 
   def validate_name(name)
     @name = @corrector.correct_name(name)
+  end
+
+  def book_rents(rental)
+    @books.push(rental)
   end
 
   private
