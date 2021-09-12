@@ -3,9 +3,9 @@ class Person
   attr_accessor :name, :age
   attr_reader :id
 
-  def initialize(age, parent_permission: true, name: 'Unknown')
+  def initialize(age, name = 'Unknown', parent_permission: true)
     @corrector = Corrector.new
-    @id = Random.new_seed
+    @id = Random.rand(1..1000)
     @name = name
     @age = age
     @parent_permission = parent_permission
@@ -16,8 +16,8 @@ class Person
     is_of_age? || @parent_permission
   end
 
-  def validate_name(name)
-    @name = @corrector.correct_name(name)
+  def validate_name
+    @name = @corrector.correct_name(@name)
   end
 
   def book_rents(rental)
@@ -32,5 +32,3 @@ class Person
   end
   # rubocop:enable Naming/PredicateName
 end
-
-require_relative 'teacher'
