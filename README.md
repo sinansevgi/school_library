@@ -7,6 +7,9 @@
 - Ruby
 
 ## Getting Started
+- Clone or download the repository
+- Open project directory
+- Run `irb -r ` with the filename that you want to use
 
 
 ## Authors
