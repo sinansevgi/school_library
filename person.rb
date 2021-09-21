@@ -2,6 +2,7 @@ require_relative 'corrector'
 class Person
   attr_accessor :name, :age
   attr_reader :id
+  @@instances = []
 
   def initialize(age, name = 'Unknown', parent_permission: true)
     @corrector = Corrector.new
@@ -10,6 +11,7 @@ class Person
     @age = age
     @parent_permission = parent_permission
     @books = []
+    @@instances << self
   end
 
   def can_use_services?

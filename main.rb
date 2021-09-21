@@ -19,8 +19,6 @@ def list_books
   end
 end
 
-def list_rentals
-end
 
 def create_person
   default_class = Classroom.new('science')
@@ -65,13 +63,27 @@ def create_book
 end
 
 def create_rental
+  puts 'Select a book from the following list by number'
+  books = Book.all
+  list_books
+  book = books[gets.chomp.to_i]
+  puts 'Select a person from the following list by number (not id)'
+  people = Person.all
+  people.each_with_index do |person, index|
+    puts "#{index}) Title:#{person.name} id:#{person.id}"
+  end
+  person = people[gets.chomp.to_i]
+  print 'Date: '
+  date = gets.chomp
+  Rental.new(date, book, person)
+  puts 'Rental created successfully'
 end
 
 def list_person_rentals
-  # print 'ID: '
-  # id = gets.chomp.to_i
-  # person = Person.all.filter{|person| person.id == id}
-  # p person
+  print 'ID: '
+  id = gets.chomp.to_i
+  person = Person.all.filter{|person| person.id == id}
+  person.books
 end
 
 def main
