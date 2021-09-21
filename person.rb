@@ -15,6 +15,10 @@ class Person
     self.class.all << self
   end
 
+  def books_list
+    @books
+  end
+
   def can_use_services?
     is_of_age? || @parent_permission
   end
