@@ -107,10 +107,11 @@ def main
     create_rental
   when 6
     list_person_rentals
-  else
+  when 7
     return
+  else
+    main
   end
-  main
 end
 
 main
