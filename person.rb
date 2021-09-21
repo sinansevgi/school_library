@@ -3,6 +3,8 @@ class Person
   attr_accessor :name, :age
   attr_reader :id
 
+  @instances = []
+
   def initialize(age, name = 'Unknown', parent_permission: true)
     @corrector = Corrector.new
     @id = Random.rand(1..1000)
@@ -10,10 +12,23 @@ class Person
     @age = age
     @parent_permission = parent_permission
     @books = []
+    self.class.all << self
+  end
+
+  def books_list
+    @books
   end
 
   def can_use_services?
     is_of_age? || @parent_permission
+  end
+
+  def self.all
+    @instances
+  end
+
+  def self.all=(value)
+    @instances = value
   end
 
   def validate_name
