@@ -12,7 +12,7 @@ class Person
     @age = age
     @parent_permission = parent_permission
     @books = []
-    all << self
+    self.class.all << self
   end
 
   def can_use_services?
@@ -21,6 +21,10 @@ class Person
 
   def self.all
     @instances
+  end
+
+  def self.all=(value)
+    @instances = value
   end
 
   def validate_name
