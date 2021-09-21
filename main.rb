@@ -19,7 +19,6 @@ def list_books
   end
 end
 
-
 def create_person
   default_class = Classroom.new('science')
 
@@ -30,23 +29,14 @@ def create_person
   print 'Name: '
   name = gets.chomp
 
-  if (role == 1)
+  if role == 1
     print 'Has parent permission? [y/n]: '
-    permission = gets.chomp == 'y' ? true : false
-    Student.new(
-      age,
-      name,
-      default_class,
-      permission
-      )
+    permission = gets.chomp == 'y'
+    Student.new(age, default_class, name, permission)
   else
     print 'Specialization: '
     specialization = gets.chomp
-    Teacher.new(
-      age,
-      name,
-      specialization,
-    )
+    Teacher.new(age, specialization, name)
   end
 
   puts 'Person created succesfully'
@@ -82,15 +72,13 @@ end
 def list_person_rentals
   print 'ID: '
   id = gets.chomp.to_i
-  person = Person.all.filter{|person| person.id == id}
+  person = Person.all.filter { |x| x.id == id }
   person.books
 end
 
 def main
-  puts '1 - List all people'
-  puts '2 - List all books'
-  puts '3 - Create a person'
-  puts '4 - Create a book'
+  puts "1 - List all people\n2 - List all books"
+  puts "3 - Create a person\n4 - Create a book"
   puts '5 - Create a rental'
   puts '6 - List all rentals for a given person id'
   puts '7 - Exit'
@@ -107,11 +95,8 @@ def main
     create_rental
   when 6
     list_person_rentals
-  when 7
-    return
-  else
-    main
   end
+  main
 end
 
 main

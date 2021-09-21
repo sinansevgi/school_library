@@ -1,15 +1,16 @@
 require_relative 'person'
 class Teacher < Person
-  @@instances = []
-  def initialize(age, name = 'Unknown', specialization)
+  @teachers = []
+  def initialize(age, specialization, name = 'Unknown')
     super(age, name)
     @specialization = specialization
-    @@instances << self
+    all << self
   end
 
   def self.all
-    @@instances
+    @teachers
   end
+
   def can_use_services?
     true
   end

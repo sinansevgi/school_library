@@ -1,12 +1,13 @@
 class Book
   attr_accessor :title, :author
-  @@instances = []
+
+  @instances = []
 
   def initialize(title, author)
     @title = title
     @author = author
     @rentals = []
-    @@instances << self
+    all << self
   end
 
   def rent_book(rental)
@@ -14,6 +15,6 @@ class Book
   end
 
   def self.all
-    @@instances
+    @instances
   end
 end
