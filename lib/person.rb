@@ -3,8 +3,6 @@ class Person
   attr_accessor :name, :age
   attr_reader :id
 
-  @instances = []
-
   def initialize(age, name = 'Unknown', parent_permission: true)
     @corrector = Corrector.new
     @id = Random.rand(1..1000)
@@ -20,15 +18,7 @@ class Person
   end
 
   def can_use_services?
-    is_of_age? || @parent_permission
-  end
-
-  def self.all
-    @instances
-  end
-
-  def self.all=(value)
-    @instances = value
+    adult? || @parent_permission
   end
 
   def validate_name
@@ -39,11 +29,24 @@ class Person
     @books.push(rental)
   end
 
+  def self.create_prompt
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+    person_type = gets.chomp
+    if valid_input?(person_type)
+      person_type
+    else
+      puts 'Invalid Input'
+      nil
+    end
+  end
+
+  def self.valid_input?(person_type)
+    [1, 2].include?(person_type.to_i)
+  end
+
   private
 
-  # rubocop:disable Naming/PredicateName
-  def is_of_age?
+  def adult?
     @age >= 18
   end
-  # rubocop:enable Naming/PredicateName
 end
